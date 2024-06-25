@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List</title>
+  <style>
+    .product {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin: 10px 0;
+      width: 400px;
+      display: flex;
+    flex-direction: column;
+    
+    
+    }
+    .product img {
+      display: block;
+      margin: 0 auto 10px;
+    }
+    .cont{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        
+    }
+    #form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+    #title #price{
+        width: 100px;
+    }
+  </style>
+</head>
+<body>
+    <div class="cont">
+  <div id="products"></div>
+  <script src="app.js"></script> 
+</div>
+
+
+<form id="form">
+    <label >Title :</label>
+    <input type="text" name="title" id="title">
+    <label>Price :</label>
+    <input type="text" name="price" id="price" >
+    <label>Desc :</label>
+    <input type="text" name="desc" id="desc" >
+    <label>Image :</label>
+    <input type="text" name="image" id="image" >
+    <input type="submit" value="submit" id="submit">
+</form>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref , set , get , child} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+apiKey: "AIzaSyDUEgmf8re6YBZtPcdRDP9-4e4dw0aqpTg",
+authDomain: "create-df0d7.firebaseapp.com",
+projectId: "create-df0d7",
+storageBucket: "create-df0d7.appspot.com",
+messagingSenderId: "838241329099",
+appId: "1:838241329099:web:e5d3c9b4358d59f1e6a04e"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// get ref to database services
+const db = getDatabase(app)
+
+document.getElementById("submit").addEventListener("click", function(e){
+e.preventDefault();
+
+set(ref(db , 'user/' + document.getElementById('title').value) ,{
+title : document.getElementById("title").value ,
+price : document.getElementById('price').value ,
+desc : document.getElementById('desc').value ,
+img : document.getElementById('image');
+
+
+
+});
+alert("succ")
+})
+
+</script>
+</body>
+</html>
